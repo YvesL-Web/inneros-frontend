@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { api, queryKeys } from '@/lib/api';
-import { ProgressResponse, type ProgressResponseT } from '@/lib/progress';
+import { ProgressResponse, type ProgressResponseT } from '@/schemas/progress';
 
 export function useProgress() {
   return useQuery({

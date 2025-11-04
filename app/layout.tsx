@@ -4,14 +4,12 @@ import './globals.css';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '@/lib/queryClient';
-import HeaderProgress from './components/HeaderProgress';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <body>
         <QueryClientProvider client={queryClient}>
-          <HeaderProgress />
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
