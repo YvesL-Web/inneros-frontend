@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, queryKeys } from '@/lib/api';
 import { QuestsResponse, QuestsResponseT } from '@/schemas/quest';
+import toast from 'react-hot-toast';
 
 export function useQuests() {
   return useQuery({
@@ -20,13 +21,19 @@ export function useQuests() {
 export function useCompleteQuest() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (slug: string) =>
-      api<{ ok: true; already: boolean }>(`/quests/${encodeURIComponent(slug)}/complete`, {
+    mutationFn: async (slug: string) => {
+      return api<{ ok: true; already: boolean }>(`/quests/${encodeURIComponent(slug)}/complete`, {
         method: 'POST',
-      }),
-    onSuccess: () => {
+      });
+    },
+    onSuccess: (res) => {
       qc.invalidateQueries({ queryKey: ['quests'] });
       qc.invalidateQueries({ queryKey: queryKeys.progress });
+      toast.success(res.already ? 'Déjà terminée' : 'Quête complétée 🎉');
+    },
+    onError: (e: unknown) => {
+      const msg = e instanceof Error ? e.message : 'Impossible de compléter la quête';
+      toast.error(msg);
     },
   });
 }

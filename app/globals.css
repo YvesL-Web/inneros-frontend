@@ -1,8 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bg: #0b0b10;
+  --panel: #12121a;
+  --text: #e7e7ea;
+  --muted: #a2a2ad;
+  --primary: #7c5cff; /* violet néon */
+  --accent: #2ee6a6; /* vert menthe */
+  --ring: rgba(124, 92, 255, 0.4);
+}
+
+[data-theme='aurora'] {
+  --bg: #06090f;
+  --panel: #0a0f16;
+  --text: #e9f0ff;
+  --muted: #9eb3d0;
+  --primary: #6aa6ff; /* bleu */
+  --accent: #b7ff7a; /* lime */
+  --ring: rgba(106, 166, 255, 0.45);
 }
 
 @theme inline {
@@ -20,7 +37,48 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  /* background: var(--background); */
+  /* color: var(--foreground); */
+  background: radial-gradient(60vmax 60vmax at 10% 20%, rgba(124, 92, 255, 0.16), transparent 60%),
+    radial-gradient(50vmax 50vmax at 90% 10%, rgba(46, 230, 166, 0.14), transparent 55%), var(--bg);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+}
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+.badge {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: var(--text);
+}
+.button-primary {
+  background: linear-gradient(180deg, var(--primary), #5942d8);
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  box-shadow: 0 6px 18px rgba(124, 92, 255, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.45);
+}
+.button-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+.button-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
 }

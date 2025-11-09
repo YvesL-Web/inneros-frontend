@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { NotificationsList, NotificationsListT } from '@/schemas/notifications';
+import { toast } from 'react-hot-toast/headless';
 
 export function useNotifications() {
   return useQuery({
@@ -26,6 +27,8 @@ export function useMarkNotificationRead() {
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['notifications'] });
+      toast.success('Notification marquée comme lue');
     },
+    onError: () => toast.error('Échec du marquage'),
   });
 }

@@ -1,12 +1,18 @@
 'use client';
 
 import { useMarkNotificationRead, useNotifications } from '@/hooks/useNotifications';
+import { SkeletonRows } from './ui/Skeleton';
 
 export default function NotificationsList() {
   const { data, isLoading, error } = useNotifications();
   const { mutate, isPending } = useMarkNotificationRead();
 
-  if (isLoading) return <div style={{ padding: 8 }}>Chargement des notifications…</div>;
+  if (isLoading)
+    return (
+      <div style={{ padding: 8 }}>
+        <SkeletonRows rows={4} />
+      </div>
+    );
   if (error)
     return (
       <div style={{ padding: 8, color: 'crimson' }}>Erreur de chargement des notifications</div>
